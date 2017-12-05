@@ -79,8 +79,8 @@ function hellothereum_permission() {
 function hellothereum_buy() {
   global $user;
   $content = '';
-
-    $client = user_load($user->uid);
+    $client = user_load($user->uid); 
+    //kpr($client); die;
     $content .= '<br><b>Client</b><br>hash: '.$client->hash.'<br>address: <span id="client-address"></span><br>eth balance : <span id="client-eth"></span><br>token balance: <span id="client-token"></span>';
     $content .= '<br>Password: <input type="text" id="eth-password" /> <input id="eth-buy" type="button" value="Buy 1 Token for 0.001 ether">';
     $content .= '<br>Contract token available : <span id="contract-token"></span>';
@@ -90,7 +90,7 @@ function hellothereum_buy() {
         'token_emh_deployed_contract_ABI' => variable_get('emh_blockchain_Token_deployed_contract_ABI'),
         'ethereum_fallback' => variable_get('ethereum_user_register_drupal_fallback_node'),
         'clientHash' => $client->hash,
-        'clientAddress' => $client->ethereum_user_address['und'][0]['ethereum_address'],
+        'clientAddress' => $client->field_ethaddress['und'][0]['value'],
       ),
     ), 'setting');
     drupal_add_js(drupal_get_path('module', 'hellothereum') . '/js/web3.min.js', array('scope' => 'footer'));
@@ -111,7 +111,7 @@ function hellothereum_user_form($form, &$form_state) {
     '#type' => 'textfield',
     '#size' => 42,
     '#maxlength' => 42,
-    '#default_value' => $account->ethereum_user_address['und'][0]['ethereum_address'], //'TODO: default value, form validation and user field save',
+    '#default_value' => $account->field_ethaddress['und'][0]['value'], 
     '#description' => t('Ethereum addresses must begin with 0x and 40 hexadecimals characters must follow.'),
   );
 
@@ -138,7 +138,7 @@ function hellothereum_user_form_submit($form, &$form_state) {
   $address = $form_state['input']['ethereum_user_address'];
   global $user;
   $account = user_load($user->uid);
-  $account->ethereum_user_address['und'][0]['ethereum_address'] = $address;
+  $account->field_ethaddress['und'][0]['value'] = $address;
   user_save($account);
 }
 
@@ -159,9 +159,9 @@ function hellothereum_register($this_user) {
   }
 
   $output = array();
-
+  kpr(user_load($user->uid));
   $this_user_wrapper = entity_metadata_wrapper('user', $this_user);
-  $this_user_ethereum_address = $this_user_wrapper->ethereum_user_address->value();
+  $this_user_ethereum_address = $this_user_wrapper->field_ethaddress->value();
 
   // Ethereum user address.
   $address = '<div id="ethereum_user_address">';
