@@ -1,0 +1,10 @@
+name = Ethereum hello-world
+description = Simple hello world module to show how to connect ethereum with drupal via web3.js.
+package = Ethereum
+core = 7.x
+
+; Dependencies
+dependencies[] = entity
+dependencies[] = ethereum_address_field
+dependencies[] = libraries
+dependencies[] = user_hash
