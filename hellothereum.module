@@ -167,10 +167,9 @@ function hellothereum_register() {
   if ($this_user_ethereum_address) {
 
     // User registry check.
-    $loader = theme_image(array('path' => drupal_get_path('module', 'hellothereum') . '/img/loader.svg'));
     $registry = '<div id="ethereum_user_registry">';
     $registry  .= '<h2>' . t('Ethereum user registry') . '</h2>';
-    $registry  .= '<div id="ethereum_user_registry_wait"><p>' . t('Please wait while we check if you are in our user registry on Ethereum...') . '</p><p>' . $loader . '</p></diV>';
+    $registry  .= '<div id="ethereum_user_registry_wait"><p>' . t('Please wait while we check if you are in our user registry on Ethereum...') . '</p></diV>';
     $registry  .= '<p id="ethereum_user_registry_validated">' . t('Yes, you are in our Ethereum user registry!') . '</p>';
     $register_link = ($user->uid == $this_user->uid) ? '<a href="#">' . t('To use Ethereum features with us, please sign our user registry.') . '</a>' : t('User did not sign the registry and you can not do it as an admin');
     $registry  .= '<p id="ethereum_user_registry_sign">' . $register_link . '</p>';
