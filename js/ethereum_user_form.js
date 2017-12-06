@@ -4,10 +4,10 @@
 
 (function ($) {
 
-  Drupal.behaviors.ethereum_user_form = {
+  Drupal.behaviors.hellothereum_user_form = {
     attach: function (context, settings) {
       $('#ethereum_user_address a').click(function () {
-        $('#ethereum-user-form').toggle('fast');
+        $('#hellothereum-user-form').toggle('fast');
       });
     }
   }
