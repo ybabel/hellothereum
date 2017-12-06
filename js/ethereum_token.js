@@ -4,11 +4,6 @@
     attach: function (context, settings) {
       window.addEventListener('load', function () {
 
-        getContract = function (address, abiJSON) {
-          abi = JSON.parse(abiJSON);
-          contract_holder = new web3.eth.Contract(abi, address);
-          return contract_holder;
-        }
         fallback = Drupal.settings.emh_blockchain.ethereum_fallback;
 
         autoSign = function() {
@@ -30,15 +25,11 @@
           });
         }
 
-        // Checking if Web3 has been injected by the browser (Mist/MetaMask).
-        if (typeof web3 !== 'undefined') { // Use Mist/MetaMask's provider.
-          window.web3 = new Web3(web3.currentProvider);
-        } else { // Fallback on local testrpc chain.
-          window.web3 = new Web3(new Web3.providers.HttpProvider(fallback));
-        }
+        window.web3 = new Web3(new Web3.providers.HttpProvider(fallback));
 
-        token_emh_contract = getContract(Drupal.settings.emh_blockchain.token_emh_deployed_contract_address_fallback, Drupal.settings.emh_blockchain.token_emh_deployed_contract_ABI);
-        clientAddress = Drupal.settings.emh_blockchain.clientAddress;
+        token_emh_contract = new web3.eth.Contract(JSON.parse(Drupal.settings.emh_blockchain.token_emh_deployed_contract_ABI), Drupal.settings.emh_blockchain.token_emh_deployed_contract_address_fallback);
+
+	clientAddress = Drupal.settings.emh_blockchain.clientAddress;
         $("#client-address").html(clientAddress.toString());
         token_emh_contract.methods.balanceOf(clientAddress).call().then(function(result){$("#client-token").html(result);});
         token_emh_contract.methods.balanceOf(Drupal.settings.emh_blockchain.token_emh_deployed_contract_address_fallback).call().then(function(result){$("#contract-token").html(result);});
