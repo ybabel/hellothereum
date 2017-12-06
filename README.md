@@ -3,7 +3,7 @@ Drupal 7 and ethereum Hello world
 
 ## Prerequisites
  * install parity https://github.com/paritytech/parity
- * launch parity with something like that : parity ui --chain=dev --unsafe-expose --jsonrpc-apis=all
+ * launch parity with something like that : `parity ui --chain=dev --unsafe-expose --jsonrpc-apis=all`
  * enable hellothereum
  * create at least one ethereum account with some ethereum
  * deploy both contracts (/sol) get their addresses
@@ -13,9 +13,9 @@ Drupal 7 and ethereum Hello world
  * use mintToken to generate some intials tokens 
 
 ## Install
- * install and enable ser_hash
+ * install and enable `user_hash` drupal module
  * go to `/admin/people` and generate hash for at least your current account
- * enable hellothereum
+ * enable `hellothereum`
  * go to `/admin/hellothereum` and copy contract adresses and ABI in the
 
 ## Usage
@@ -26,4 +26,4 @@ Drupal 7 and ethereum Hello world
  * you should be registered
  * go to `/hellothereum/buy` and you can either
    - leave the password field empty and validate the transaction in parity
-   - type your password and the transaction will be automatically validated vie JSON-RPC
+   - type your password and the transaction will be automatically validated via JSON-RPC
