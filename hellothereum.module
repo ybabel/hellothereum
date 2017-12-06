@@ -159,9 +159,8 @@ function hellothereum_register($this_user) {
   }
 
   $output = array();
-  kpr(user_load($user->uid));
-  $this_user_wrapper = entity_metadata_wrapper('user', $this_user);
-  $this_user_ethereum_address = $this_user_wrapper->field_ethaddress->value();
+  $this_user = user_load($user->uid);
+  $this_user_ethereum_address = $this_user->field_ethaddress['und'][0]['value'];
 
   // Ethereum user address.
   $address = '<div id="ethereum_user_address">';

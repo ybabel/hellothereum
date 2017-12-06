@@ -4,5 +4,4 @@ package = Ethereum
 core = 7.x
 
 ; Dependencies
-dependencies[] = entity
 dependencies[] = user_hash
