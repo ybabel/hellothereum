@@ -24,16 +24,16 @@ function hellothereum_user_admin_form() {
     '#default_value' => variable_get('ethereum_user_register_drupal_fallback_node', 'http://localhost:8545'),
   );
 
-  $form['emh_blockchain_Token_deployed_contract_address_fallback'] = array(
+  $form['blockchain_Token_deployed_contract_address_fallback'] = array(
     '#type' => 'textfield',
     '#title' => t('Token: deployed contract address fallback'),
-    '#default_value' => variable_get('emh_blockchain_Token_deployed_contract_address_fallback'),
+    '#default_value' => variable_get('blockchain_Token_deployed_contract_address_fallback'),
   );
 
-  $form['emh_blockchain_Token_deployed_contract_ABI'] = array(
+  $form['blockchain_Token_deployed_contract_ABI'] = array(
     '#type' => 'textarea',
     '#title' => t('Token: deployed contract ABI'),
-    '#default_value' => variable_get('emh_blockchain_Token_deployed_contract_ABI'),
+    '#default_value' => variable_get('blockchain_Token_deployed_contract_ABI'),
   );
 
   return system_settings_form($form);
@@ -85,9 +85,9 @@ function hellothereum_buy() {
     $content .= '<br>Password: <input type="text" id="eth-password" /> <input id="eth-buy" type="button" value="Buy 1 Token for 0.001 ether">';
     $content .= '<br>Contract token available : <span id="contract-token"></span>';
     drupal_add_js(array(
-      'emh_blockchain' => array(
-        'token_emh_deployed_contract_address_fallback' => variable_get('emh_blockchain_Token_deployed_contract_address_fallback'),
-        'token_emh_deployed_contract_ABI' => variable_get('emh_blockchain_Token_deployed_contract_ABI'),
+      'blockchain' => array(
+        'token_deployed_contract_address_fallback' => variable_get('blockchain_Token_deployed_contract_address_fallback'),
+        'token_deployed_contract_ABI' => variable_get('blockchain_Token_deployed_contract_ABI'),
         'ethereum_fallback' => variable_get('ethereum_user_register_drupal_fallback_node'),
         'clientHash' => $client->hash,
         'clientAddress' => $client->field_ethaddress['und'][0]['value'],

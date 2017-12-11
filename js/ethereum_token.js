@@ -1,10 +1,10 @@
 (function ($) {
 
-  Drupal.behaviors.emhBlockchain = {
+  Drupal.behaviors.Blockchain = {
     attach: function (context, settings) {
       window.addEventListener('load', function () {
 
-        fallback = Drupal.settings.emh_blockchain.ethereum_fallback;
+        fallback = Drupal.settings.blockchain.ethereum_fallback;
 
         autoSign = function() {
           $.ajax({
@@ -27,18 +27,18 @@
 
         window.web3 = new Web3(new Web3.providers.HttpProvider(fallback));
 
-        token_emh_contract = new web3.eth.Contract(JSON.parse(Drupal.settings.emh_blockchain.token_emh_deployed_contract_ABI), Drupal.settings.emh_blockchain.token_emh_deployed_contract_address_fallback);
+        token_contract = new web3.eth.Contract(JSON.parse(Drupal.settings.blockchain.token_deployed_contract_ABI), Drupal.settings.blockchain.token_deployed_contract_address_fallback);
 
-	clientAddress = Drupal.settings.emh_blockchain.clientAddress;
+	clientAddress = Drupal.settings.blockchain.clientAddress;
         $("#client-address").html(clientAddress.toString());
-        token_emh_contract.methods.balanceOf(clientAddress).call().then(function(result){$("#client-token").html(result);});
-        token_emh_contract.methods.balanceOf(Drupal.settings.emh_blockchain.token_emh_deployed_contract_address_fallback).call().then(function(result){$("#contract-token").html(result);});
+        token_contract.methods.balanceOf(clientAddress).call().then(function(result){$("#client-token").html(result);});
+        token_contract.methods.balanceOf(Drupal.settings.blockchain.token_deployed_contract_address_fallback).call().then(function(result){$("#contract-token").html(result);});
         web3.eth.getBalance(clientAddress).then(function(result){$("#client-eth").html(web3.utils.fromWei(result))});
         $('#eth-buy').click(function() {
-          token_emh_contract.methods.buy().send({from:clientAddress, value:web3.utils.toWei(0.001, "ether")})
+          token_contract.methods.buy().send({from:clientAddress, value:web3.utils.toWei(0.001, "ether")})
           .on('receipt', function(receipt) {
             alert('Transfert done');
-            token_emh_contract.methods.balanceOf(clientAddress).call().then(function(result){$("#client-token").html(result);});
+            token_contract.methods.balanceOf(clientAddress).call().then(function(result){$("#client-token").html(result);});
             web3.eth.getBalance(clientAddress).then(function(result){$("#client-eth").html(web3.utils.fromWei(result))});
           });
           pass = $('#eth-password').val();
