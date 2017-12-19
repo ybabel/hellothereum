@@ -26,4 +26,5 @@ Drupal 7 and ethereum Hello world
  * you should be registered
  * go to `/hellothereum/buy` and you can either
    - leave the password field empty and validate the transaction in parity
-   - type your password and the transaction will be automatically validated via JSON-RPC
+   - ~~type your password and the transaction will be automatically validated via JSON-RPC~~
+   - type your PRIVATE KEY and the transaction will be signed automatically
